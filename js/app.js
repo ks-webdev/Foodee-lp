@@ -1,88 +1,76 @@
-const h1 = document.querySelector('.heading-primary')
+// 年の自動更新
+const yearEl = document.querySelector('.year');
+const currentYear = new Date().getFullYear();
+yearEl.textContent = currentYear;
 
-// h1.addEventListener("click", function () {
-//   h1.textContent = myName;
-//   h1.style.backgroundColor = "red";
-//   h1.style.padding = "5rem";
-// });
+// モバイルナビ
 
-///////////////////////////////////////////////////////////
-// Set current year
-const yearEl = document.querySelector('.year')
-const currentYear = new Date().getFullYear()
-yearEl.textContent = currentYear
-
-///////////////////////////////////////////////////////////
-// Make mobile navigation work
-
-const btnNavEl = document.querySelector('.btn-mobile-nav')
-const headerEl = document.querySelector('.header')
+const btnNavEl = document.querySelector('.btn-mobile-nav');
+const headerEl = document.querySelector('.header');
 
 btnNavEl.addEventListener('click', function () {
-  headerEl.classList.toggle('nav-open')
-})
+  headerEl.classList.toggle('nav-open');
+});
 
-///////////////////////////////////////////////////////////
-// Smooth scrolling animation
+// スムーズスクロール
 
-const allLinks = document.querySelectorAll('a:link')
+const allLinks = document.querySelectorAll('a:link');
 
 allLinks.forEach(function (link) {
   link.addEventListener('click', function (e) {
-    e.preventDefault()
-    const href = link.getAttribute('href')
+    e.preventDefault();
+    const href = link.getAttribute('href');
 
     // Scroll back to top
     if (href === '#')
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
-      })
+      });
 
     // Scroll to other links
     if (href !== '#' && href.startsWith('#')) {
-      const sectionEl = document.querySelector(href)
-      sectionEl.scrollIntoView({ behavior: 'smooth' })
+      const sectionEl = document.querySelector(href);
+      sectionEl.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Close mobile naviagtion
     if (link.classList.contains('main-nav-link'))
-      headerEl.classList.toggle('nav-open')
-  })
-})
+      headerEl.classList.toggle('nav-open');
+  });
+});
 
-///////////////////////////////////////////////////////////
-/* PRICING TOGGLE */
-const pricing = document.querySelectorAll('.pricing-num')
-const toggleButton = document.querySelector('#toggle')
+/* プラン値段変更 */
+
+const pricing = document.querySelectorAll('.pricing-num');
+const toggleButton = document.querySelector('#toggle');
 
 function togglePricing() {
   const prices = toggleButton.checked
     ? ['3995', '6995', '9995']
-    : ['395', '645', '999']
+    : ['395', '645', '999'];
   for (let i = 0; i < pricing.length; i++) {
-    pricing[i].textContent = prices[i]
+    pricing[i].textContent = prices[i];
   }
 }
 
-toggleButton.addEventListener('click', togglePricing)
+toggleButton.addEventListener('click', togglePricing);
 
-///////////////////////////////////////////////////////////
-// Sticky navigation
+// 固定ナビ
 
-const sectionHeroEl = document.querySelector('.section-hero')
+const sectionHeroEl = document.querySelector('.section-hero');
 
 const obs = new IntersectionObserver(
   function (entries) {
-    const ent = entries[0]
-    console.log(ent)
+    const ent = entries[0];
+    console.log(ent);
 
     if (ent.isIntersecting === false) {
-      document.body.classList.add('sticky')
+      document.body.classList.add('sticky');
     }
 
     if (ent.isIntersecting === true) {
-      document.body.classList.remove('sticky')
+      document.body.classList.remove('sticky');
     }
   },
   {
@@ -91,25 +79,24 @@ const obs = new IntersectionObserver(
     threshold: 0,
     rootMargin: '-80px',
   }
-)
-obs.observe(sectionHeroEl)
+);
+obs.observe(sectionHeroEl);
 
-///////////////////////////////////////////////////////////
 // Fixing flexbox gap property missing in some Safari versions
 function checkFlexGap() {
-  var flex = document.createElement('div')
-  flex.style.display = 'flex'
-  flex.style.flexDirection = 'column'
-  flex.style.rowGap = '1px'
+  var flex = document.createElement('div');
+  flex.style.display = 'flex';
+  flex.style.flexDirection = 'column';
+  flex.style.rowGap = '1px';
 
-  flex.appendChild(document.createElement('div'))
-  flex.appendChild(document.createElement('div'))
+  flex.appendChild(document.createElement('div'));
+  flex.appendChild(document.createElement('div'));
 
-  document.body.appendChild(flex)
-  var isSupported = flex.scrollHeight === 1
-  flex.parentNode.removeChild(flex)
-  console.log(isSupported)
+  document.body.appendChild(flex);
+  var isSupported = flex.scrollHeight === 1;
+  flex.parentNode.removeChild(flex);
+  console.log(isSupported);
 
-  if (!isSupported) document.body.classList.add('no-flexbox-gap')
+  if (!isSupported) document.body.classList.add('no-flexbox-gap');
 }
-checkFlexGap()
+checkFlexGap();
