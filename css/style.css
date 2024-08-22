@@ -319,6 +319,22 @@ strong {
   width: 100%;
 }
 
+.splide {
+  width: 100vw;
+  height: 40vh;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.splide img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
 .delivered-meals {
   display: flex;
   align-items: center;
@@ -1005,7 +1021,7 @@ strong {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s ease-in;
+    transition: all 50ms ease-in;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;

@@ -30,6 +30,9 @@
 /* HERO */
 @import './components/hero';
 
+// Slider
+@import './components/slider';
+
 // デリバリー
 @import './components/delivery';
 
@@ -53,6 +56,5 @@
 
 /* FOOTER */
 @import './components/footer';
-
 
 @import 'mobile';
